@@ -12,6 +12,8 @@
 #===================================================================================================
 #                                          IMPORT AND START
 #===================================================================================================
+
+
 class Date(object):
     
     #-------- Definition of the constructor ---------
@@ -21,14 +23,31 @@ class Date(object):
         self.month = month
         self.year = year
 
-    #-------- Definition of the error method ---------
-    def error (self, error):
-        if error == "error_day":
+    #-------- Definition of the display method ---------
+    def display (self, msg):
+        if msg == "error_day":
             return "\nPlease enter a number of day between the first and the last day of the month."
-        elif error == "error_month":
+        elif msg == "error_month":
             return "\nPlease enter a number of month between the first and the last month of the year."
-        elif error == "error_year":
+        elif msg == "error_year":
             return "\nPlease enter a number of year between 1000 and 9999."
+
+
+    #-------- Definition of the check year method ---------
+    def check_year_is_leap (self, year):
+
+        if year % 4 == 0:
+            if year % 100 == 0:
+                if year % 400 == 0:
+                    return True
+                else:
+                    return False
+            else:
+                return True
+        else:
+            return False
+
+    
 
     #-------- Definition of the Getters ---------
     @property
@@ -40,8 +59,6 @@ class Date(object):
     @property
     def year(self):
         return self.__year
-    
-
 
     #-------- Definition of the Setters ---------
     @day.setter
@@ -52,6 +69,7 @@ class Date(object):
         #If day is not between the first and the last day of the month
         elif  value < 1 or value > 31:
             self.__day = "error_day"
+        #Other case
         else:
             self.__day = value
 
@@ -63,6 +81,7 @@ class Date(object):
         #If month is not between the first and the last month of the year
         elif  value < 1 or value > 12:
             self.__month = "error_month"
+        #Other case
         else:
             self.__month = value
 
@@ -74,6 +93,7 @@ class Date(object):
         #If year is not between 1000 and 9999 
         elif  value < 1000 or  value > 9999:
            self.__year = "error_year"
+        #Other case
         else:
            self.__year = value
 

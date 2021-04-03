@@ -31,21 +31,30 @@ def reboot():
 def main():
     print("\nEnter your date of birth: \n")
     try:
+        #We ask the day, month, year of the user and we call the class Date
         day = input("Days : ")
         month = input("Month : ")
         year = input("Year : ")
         class_date = Date(int(day), int(month), int(year))
 
-        #Check if we have errors in our getters
+        #Check if we have errors in our getters and we display it
         if class_date.day == "error_day":
-            print(class_date.error(class_date.day))
+            print(class_date.display(class_date.day))
             main()
         elif class_date.month == "error_month":
-            print(class_date.error(class_date.month))
+            print(class_date.display(class_date.month))
             main()
         elif class_date.year == "error_year":
-            print(class_date.error(class_date.year))
+            print(class_date.display(class_date.year))
             main()
+
+        #Check if it date is a leap and we display
+        state_year = class_date.check_year_is_leap(class_date.year)
+        if state_year == True:
+            print("Leap Year")
+        else:
+            print("No leap Year")
+        main()
 
     except ValueError:
         print("Please enter an integer! \n")
