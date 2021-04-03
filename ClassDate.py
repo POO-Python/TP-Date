@@ -31,7 +31,8 @@ class Date(object):
             return "\nPlease enter a number of month between the first and the last month of the year."
         elif msg == "error_year":
             return "\nPlease enter a number of year between 1000 and 9999."
-
+        elif msg == "error_date":
+            return "\nThis date does not exist."
 
     #-------- Definition of the check year method ---------
     def check_year_is_leap (self, year):
@@ -47,7 +48,12 @@ class Date(object):
         else:
             return False
 
-    
+    #-------- Definition of the check day method ---------
+    def check_day_exist (self):
+        if self.day == 29 and self.month == 2:
+            state_year = self.check_year_is_leap(self.year)
+            if state_year == False:
+                return "error_date"
 
     #-------- Definition of the Getters ---------
     @property

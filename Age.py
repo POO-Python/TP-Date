@@ -48,13 +48,11 @@ def main():
             print(class_date.display(class_date.year))
             main()
 
-        #Check if it date is a leap and we display
-        state_year = class_date.check_year_is_leap(class_date.year)
-        if state_year == True:
-            print("Leap Year")
-        else:
-            print("No leap Year")
-        main()
+        #Check if a date exist
+        date_existe_state = class_date.check_day_exist()
+        if date_existe_state == "error_date":
+            print(class_date.display(date_existe_state))
+            main()
 
     except ValueError:
         print("Please enter an integer! \n")
