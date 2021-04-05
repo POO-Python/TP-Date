@@ -14,8 +14,7 @@
 
 from ClassDate import Date
 from time import sleep
-
-
+from ClassDateException import *
 
 #-------- Definition of the reboot function ---------
 def reboot():
@@ -25,43 +24,45 @@ def reboot():
     sleep(1)
     print(".")
 
-
-
 #-------- Definition of the main function ---------
 def main():
-    print("\nEnter your date of birth: \n")
     try:
         #We ask the day, month, year of the user and we call the class Date
+        print("\nEnter your date of birth:\n")
         day = input("Days : ")
         month = input("Month : ")
         year = input("Year : ")
-        class_date = Date(int(day), int(month), int(year))
-
-        #Check if we have errors in our getters and we display it
-        if class_date.day == "error_day":
-            print(class_date.display(class_date.day))
-            main()
-        elif class_date.month == "error_month":
-            print(class_date.display(class_date.month))
-            main()
-        elif class_date.year == "error_year":
-            print(class_date.display(class_date.year))
-            main()
+        birth_date =  Date(int(day), int(month), int(year))
 
         #Check if a date exist
-        date_existe_state = class_date.check_day_exist()
-        if date_existe_state == "error_date":
-            print(class_date.display(date_existe_state))
-            main()
+        date_existe_state = birth_date.check_day_exist()
+
+        #Display the birthday of the user
+        print("\nYour date of birth is : ", birth_date)
 
     except ValueError:
-        print("Please enter an integer! \n")
+        print("\nPlease enter an integer! \n")
+        reboot()
+        main()
+    except DayException as e:
+        print(e.errorDay)
+        reboot()
+        main()
+    except MonthException as e:
+        print(e.errorMonth)
+        reboot()
+        main()
+    except YearException as e:
+        print(e.errorYear)
+        reboot()
+        main()
+    except DateException as e:
+        print(e.errorDate)
         reboot()
         main()
     except Exception as e:
-        print(e)
         print(type(e))
-        print("An error has occurred. \n")
+        print("\nAn error has occurred. \n")
         reboot()
         main()
 
