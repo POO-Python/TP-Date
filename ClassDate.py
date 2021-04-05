@@ -13,27 +13,19 @@
 #                                          IMPORT AND START
 #===================================================================================================
 
+from ClassDateException import *
 
 class Date(object):
     
     #-------- Definition of the constructor ---------
-    def __init__ (self, day, month, year):
+    def __init__ (self, day=1, month=1, year=1000):
 
         self.day = day
         self.month = month
         self.year = year
+        self.error = ""
 
-    #-------- Definition of the display method ---------
-    def display (self, msg):
-        if msg == "error_day":
-            return "\nPlease enter a number of day between the first and the last day of the month."
-        elif msg == "error_month":
-            return "\nPlease enter a number of month between the first and the last month of the year."
-        elif msg == "error_year":
-            return "\nPlease enter a number of year between 1000 and 9999."
-
-
-    #-------- Definition of the check year method ---------
+    #-------- Definition of the check year is a leap method ---------
     def check_year_is_leap (self, year):
 
         if year % 4 == 0:
@@ -47,7 +39,18 @@ class Date(object):
         else:
             return False
 
-    
+    #-------- Definition of the check day exist method ---------
+    def check_day_exist (self):
+        if self.day <= 29:
+            if self.month == 2:
+                state_year = self.check_year_is_leap(self.year)
+                if state_year == False:
+                    raise DateException
+
+    #-------- Definition of the representation of the object ---------
+    def __str__(self):
+        return str(self.day) + "/" + str(self.month) + "/" + str(self.year)
+
 
     #-------- Definition of the Getters ---------
     @property
@@ -59,16 +62,19 @@ class Date(object):
     @property
     def year(self):
         return self.__year
+    @property
+    def error(self):
+        return self.__error
 
     #-------- Definition of the Setters ---------
     @day.setter
     def day(self, value):
         #If day is not an integer
         if isinstance(value, int) == False:
-            raise TypeError
+            raise ValueError
         #If day is not between the first and the last day of the month
         elif  value < 1 or value > 31:
-            self.__day = "error_day"
+            raise DayException
         #Other case
         else:
             self.__day = value
@@ -77,10 +83,10 @@ class Date(object):
     def month(self, value):
         #If month is not an integer
         if isinstance(value, int) == False:
-           raise TypeError
+           raise ValueError
         #If month is not between the first and the last month of the year
         elif  value < 1 or value > 12:
-            self.__month = "error_month"
+            raise MonthException
         #Other case
         else:
             self.__month = value
@@ -89,13 +95,24 @@ class Date(object):
     def year(self, value):
         #If year is not an integer
         if isinstance(value, int) == False:
-           raise TypeError
+           raise ValueError
         #If year is not between 1000 and 9999 
         elif  value < 1000 or  value > 9999:
-           self.__year = "error_year"
+           raise YearException
         #Other case
         else:
            self.__year = value
+    @error.setter
+    def error(self, value):
+        #If error_date is not an integer
+        if isinstance(value, str) == False:
+            raise ValueError
+        #If the day is greater than 29 and the month is Febryary
+        if self.day > 29 and self.month == 2:
+            raise DateException
+        #Other case
+        else:
+            self.__error = value
 
 
 
