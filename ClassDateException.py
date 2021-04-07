@@ -66,5 +66,21 @@ class DateException(Exception):
     def errorDate (self, value):
         self.__errorDate = value
 
+class DateBiggerException(Exception):
+
+    #-------- Definition of the constructor ---------
+    def __init__ (self):
+
+        self.biggerDate = "\nThis date is earlier than your date of birth.\n"
+    
+    #-------- Definition of the Getters ---------
+    @property
+    def errorDate(self):
+        return self.__biggerDate
+
+    #-------- Definition of the Setters ---------
+    @errorDate.setter
+    def errorDate (self, value):
+        self.__biggerDate = value
 
 
