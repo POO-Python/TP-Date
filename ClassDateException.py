@@ -117,4 +117,24 @@ class DateBiggerException(Exception):
         else:
             self.__biggerDate = value
 
+class DateSmallerException(Exception):
 
+    #-------- Definition of the constructor ---------
+    def __init__ (self):
+
+        self.smallerDate = "\nThis date is earlier than the current date.\n"
+    
+    #-------- Definition of the Getters ---------
+    @property
+    def errorDate(self):
+        return self.__smallerDate
+
+    #-------- Definition of the Setters ---------
+    @errorDate.setter
+    def errorDate (self, value):
+        #If errorDate is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__smallerDate = value
