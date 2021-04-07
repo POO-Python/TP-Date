@@ -71,7 +71,7 @@ class Id(Date):
     @registerDate.setter
     def registerDate(self, value):
         #If error_date is not an integer
-        if isinstance(value, datetime.datetime) == False:
+        if isinstance(value, Date) == False:
             raise ValueError
         #Other case
         else:
