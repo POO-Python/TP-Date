@@ -1,6 +1,6 @@
 #=====================================================================================================================
 #  ?  ABOUT
-#  @author : Germain LEIGNEL, Thibault BARRAL, Quentin SAR, Jathursan
+#  @author : Clément LO-CASCIO, Thibault BARRAL, Quentin SAR, Jathursan
 #  MEHAVARNAN
 #  @repo : https://github.com/POO-Python/TP-Date
 #  @createdOn : 12/04/2021
