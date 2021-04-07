@@ -138,6 +138,40 @@ class Date(object):
 
        return "\nLe " +  format_date + ", votre âge est de " + nbr_years + " ans et " + str(nbr_day) + " jours (à un jour près)."
 
+    #-------- Definition of the method which overloads the operator strictly prior to   ---------
+    def __lt__(self, currentDate):
+        #
+        #Ex n°1 : In this case, the date has entered by user is 5/4/2000 and the current date is 7/4/2021.
+        #         We raise an error because, the year of the date who is entered by user is smaller 
+        #         than the year of the current date.
+        #
+        #       Ex: 7/4/2021 then 5/4/2000 : Correct
+        #       Ex: 5/4/2000 then 7/4/2021 : Incorrect
+        #
+        if self.year < currentDate.year:
+            raise DateSmallerException
+        #
+        #Ex n°2 : In this case, the date has entered by user is 5/2/2021 and the current date is 7/4/2021.
+        #         We raise an error because, the month of the date who is entered by user is smaller 
+        #         than the month of the current date.
+        #
+        #       Ex: 7/4/2021 then 5/2/2021 : Correct
+        #       Ex: 5/2/2021 then 7/4/2021 : Incorrect
+        # 
+        if self.year == currentDate.year:
+            if self.month < currentDate.month:
+                raise DateSmallerException
+        #
+        #Ex n°3 : In this case, the date has entered by user is 2/4/2021 and the current date is 7/4/2021.
+        #         We raise an error because, the day of the date who is entered by user is smaller 
+        #         than the day of the current date.
+        #
+        #       Ex: 7/4/2021 then 2/4/2021 : Correct
+        #       Ex: 2/4/2021 then 7/4/2021 : Incorrect
+        #
+            elif self.month == currentDate.month:
+                if self.day < currentDate.day :
+                    raise DateSmallerException
     #-------- Definition of the Getters ---------
     @property
     def day(self):

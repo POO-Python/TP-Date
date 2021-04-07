@@ -14,17 +14,17 @@
 #===================================================================================================
 
 from ClassDate import Date
-import datetime
+from datetime import date
 
 class Id(Date):
     
     #-------- Definition of the constructor ---------
-    def __init__ (self, register_number, name, first_name, register_day, register_month, register_year):
+    def __init__ (self, register_number, name, first_name, register_date):
         
         self.registerNumber = register_number
         self.name = name
         self.firstName = first_name
-        self.registerDate = Date(register_day, register_month, register_year)
+        self.registerDate = register_date
 
     #-------- Definition of the Getters ---------
     @property
@@ -43,7 +43,7 @@ class Id(Date):
     #-------- Definition of the Setters ---------
     @registerNumber.setter
     def registerNumber(self, value):
-        #If day is not an integer
+        #If registerNumber is not an integer
         if isinstance(value, int) == False:
             raise ValueError
         #Other case
@@ -52,7 +52,7 @@ class Id(Date):
 
     @name.setter
     def name(self, value):
-        #If month is not an integer
+        #If name is not an string
         if isinstance(value, str) == False:
            raise ValueError
         #Other case
@@ -61,7 +61,7 @@ class Id(Date):
 
     @firstName.setter
     def firstName(self, value):
-        #If year is not an integer
+        #If firstName is not an string
         if isinstance(value, str) == False:
            raise ValueError
         #Other case
@@ -70,12 +70,13 @@ class Id(Date):
 
     @registerDate.setter
     def registerDate(self, value):
-        #If error_date is not an integer
+        #If registerDate is not an instance of the Date Class
         if isinstance(value, Date) == False:
             raise ValueError
         #Other case
         else:
             self.__registerDate = value
+
 
 
 
