@@ -13,7 +13,12 @@ class DayException(Exception):
     #-------- Definition of the Setters ---------
     @errorDay.setter
     def errorDay (self, value):
-        self.__errorDay = value
+        #If errorDay is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__errorDay = value
 
 class MonthException(Exception):
 
@@ -30,7 +35,12 @@ class MonthException(Exception):
     #-------- Definition of the Setters ---------
     @errorMonth.setter
     def errorMonth (self, value):
-        self.__errorMonth = value
+        #If errorMonth is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__errorMonth = value
 
 class YearException(Exception):
 
@@ -47,7 +57,12 @@ class YearException(Exception):
     #-------- Definition of the Setters ---------
     @errorYear.setter
     def errorYear (self, value):
-        self.__errorYear = value
+        #If errorYear is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__errorYear = value
 
 class DateException(Exception):
 
@@ -64,7 +79,12 @@ class DateException(Exception):
     #-------- Definition of the Setters ---------
     @errorDate.setter
     def errorDate (self, value):
-        self.__errorDate = value
+        #If errorDate is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__errorDate = value
 
 class DateBiggerException(Exception):
 
@@ -81,6 +101,11 @@ class DateBiggerException(Exception):
     #-------- Definition of the Setters ---------
     @errorDate.setter
     def errorDate (self, value):
-        self.__biggerDate = value
+        #If errorDate is not an string
+        if isinstance(value, str) == False:
+            raise ValueError
+        #In other case
+        else:
+            self.__biggerDate = value
 
 
