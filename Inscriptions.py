@@ -213,18 +213,35 @@ def main(step=None, currentDate=None, chooseRegistration=None, numberRegistratio
             if listRegistration == []:
                 print("\nNo registrations were entered today.\n")
             else:
-                #We create an empty list where we will store our names.
-                listDate = []
+                #We create an empty two-dimensional array
+                listDate = [[0 for _ in range(2)] for _ in range(len(listRegistration))]
+                i=0
+                #We add in this table the registration number and the corresponding date
                 for element in listRegistration:
-                    listDate.append(element.registerDate.date)
-                #Then we short it
-                sorted_list = sorted(listDate)
-                #Finaly, we display it
-                i = 0
-                for element in listRegistration :
+                    listDate[i][0] = element.registerNumber
+                    listDate[i][1] = element.registerDate.date
                     i += 1
-                    print("{:15} {:15} {:15} {}/{}/{}".format(str(i), element.name, element.firstName,
-                               sorted_list[i-1].day, sorted_list[i-1].month, sorted_list[i-1].year))
+                #Then we go through each element of the table with the parameter to sort the dates from the most recent to the most distant
+                sorted_list = sorted(listDate, key=lambda date: date[1])
+                
+                list_final_object = []
+
+                #We add to the final list, the objects of ClassId sorted by date of registration in the right order
+                i = 0
+                while len(sorted_list) != 0:
+                    if listRegistration[i].registerNumber == sorted_list[0][0]:
+                        list_final_object.append(listRegistration[i])
+                        del(sorted_list[0])
+                        i = 0
+                    else:
+                        i += 1
+
+                #We display it
+                number = 0
+                for element in list_final_object:
+                    number += 1
+                    print("{:15} {:15} {:15} {}/{}/{}".format(str(number), element.name, element.firstName,
+                               element.registerDate.day, element.registerDate.month, element.registerDate.year))
 
                 print("\nGoodBye\n")
                 sys.exit(0)
@@ -255,12 +272,24 @@ def main(step=None, currentDate=None, chooseRegistration=None, numberRegistratio
     except KeyboardInterrupt:
         print("\nAttempt to register cancelled.")
         main("new_registration", currentDate, chooseRegistration)
-    #except Exception as e:
-    #    print(e)
-    #    print(type(e))
+    except Exception as e:
+        print(e)
+        print(type(e))
 
 #-------- Starting  ---------
 print("\nTP Dates of the POO module in python, Group N°2.")
-listRegistration = []
+
+#-------- Auto Input Mode --------
+listRegistration = [
+    Id(1,'dupuy'.upper(), 'eric'.upper(), Date(25,3,2021)), 
+    Id(2, 'durant'.upper(), 'jean'.upper(), Date(3,5,2021)),
+    Id(3, 'dupond'.upper(), 'paul'.upper(), Date(11,3,2021)),
+    Id(4, 'durand'.upper(), 'thomas'.upper(), Date(5,3,2021))
+]
 numberRegistration = 0
-main(None, None, None, numberRegistration, None, None)
+main("print_list_registration_number", None, None, None, None, None)
+
+#-------- Manual Input Mode --------
+#listRegistration = []
+#numberRegistration = 0
+#main(None, None, None, numberRegistration, None, None)
